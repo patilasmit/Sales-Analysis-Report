@@ -1,0 +1,27 @@
+DAX QUERY POWERBI
+ 
+Date Table Creation
+DateMaster = CALENDAR(FIRSTDATE(Sales[Date]), LASTDATE(Sales[Date]))
+
+Basic Date Columns
+Year = YEAR(DateMaster[Date])
+Month = MONTH(DateMaster[Date])
+Month Name = FORMAT(DateMaster[Date], "MMM")
+MonthOrder = DateMaster[Date].[MonthNo]
+Week Day Name = FORMAT(DateMaster[Date], "DDD")
+WeekDay = WEEKDAY(DateMaster[Date])
+WeekNum = WEEKNUM(DateMaster[Date])
+
+Sales Metrics
+Total Revenue = SUM(Sales[Total Revenue])
+Total Cost = Sales[Units] * RELATED('Product'[StandardCost])
+Gross Profit = Sales[Total Revenue] - Sales[Total Cost]
+
+Aggregated Metrics
+Total Profit = SUM(Sales[Gross Profit])
+
+Growth Analysis
+Previous Month GRP = CALCULATE([Total Profit], PREVIOUSMONTH(DateMaster[Date]))
+MoM Growth = ([Total Profit] - [Previous Month GRP]) / [Previous Month GRP]
+Previous Quarter Revenue = CALCULATE([Total Rev], PREVIOUSQUARTER(DateMaster[Date]))
+QoQ Growth = ([Total Rev] - [Previous Quarter Revenue]) / [Previous Quarter Revenue]
