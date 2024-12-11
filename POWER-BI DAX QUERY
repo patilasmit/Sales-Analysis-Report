@@ -1,4 +1,4 @@
-DAX QUERY POWERBI
+POWER-BI DAX QUERY
  
 Date Table Creation
 DateMaster = CALENDAR(FIRSTDATE(Sales[Date]), LASTDATE(Sales[Date]))
